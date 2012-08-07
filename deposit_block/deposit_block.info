@@ -1,0 +1,13 @@
+name = "deposit_block"
+description = displays a block with links to create content from deposit content type group
+package = UCF Custom
+core = 7.x
+dependencies[] = block
+
+
+
+; Information added by drush on 2012-07-27
+version = "unknown"
+project = "deposit_block"
+datestamp = "1343379867"
+

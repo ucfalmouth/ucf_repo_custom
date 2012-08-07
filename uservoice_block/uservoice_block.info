@@ -1,0 +1,7 @@
+name = "uservoice_block"
+description = feedback via uservoice service
+package = ucfalmouth
+core = 7.x
+dependencies[] = block
+
+

@@ -1,0 +1,11 @@
+Menu paths and access callbacks to embed research_views
+This tiny module was created to avoid using default views arguments
+to specify the researcher uid (ie to secure view) and to hide the menu entry
+for non researchers
+
+Dependent on 'repo_researcher' feature as uses view defined 'therein'
+
+The advantage of this module is that it shows a differentiated view for the user/research tab dependent on who is looking at it. This could probably be achieved with context instead, which might be preferable in the future, not yet sure how to show/hide/change primary tab on user page depending on context as well as doing the same for a 'my-research' main menu entry.
+
+
+It could easily be extended to allow for more complex access control.

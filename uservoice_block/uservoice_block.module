@@ -1,0 +1,53 @@
+<?php
+/**
+ * @file
+ * Module file for uservoice_block.
+ */
+
+/**
+ * Implements hook_block_info().
+ *
+ * This hook declares what blocks are provided by the module.
+ */
+function uservoice_block_block_info() {
+  $blocks['uservoice_feedback'] = array(
+    // info: The name of the block.
+    'info' => t('Uservoice Feedback'),
+    'status' => TRUE,
+    'region' => 'footer',  // Not usually provided.
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * This hook generates the contents of the blocks themselves.
+ */
+function uservoice_block_block_view($delta = '') {
+  switch ($delta) {
+    case 'uservoice_feedback':
+      $block['subject'] = t('Feedback');
+      $block['content'] = uservoice_block_contents($delta);
+      break;
+  }
+  return $block;
+}
+
+/**
+ * A module-defined block content function.
+ */
+function uservoice_block_contents($which_block) {
+  switch ($which_block) {
+    case 'uservoice_feedback':
+      return "<script type=\"text/javascript\">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/AVmOaQwb9VZkzGAKkUMgzQ.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>";
+  }
+}
+

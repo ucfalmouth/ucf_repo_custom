@@ -1,0 +1,17 @@
+name = Deposit Wizard
+description = "Provides menu link and depost page seperating content types by group"
+package = UCF custom
+core = 7.x
+configure = admin/config/administration/deposit_wizard
+
+dependencies[] = content_type_groups
+dependencies[] = bundle_inherit
+
+files[] = deposit_wizard.info
+
+
+; Information added by drush on 2012-07-27
+version = "unknown"
+project = "deposit_wizard"
+datestamp = "1343379868"
+

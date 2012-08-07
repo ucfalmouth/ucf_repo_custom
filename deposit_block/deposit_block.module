@@ -1,0 +1,111 @@
+<?php
+/**
+ * @file
+ * Module file for deposit_block.
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * Provides a default page to explain what this module does.
+ */
+function deposit_block_menu() {
+  $items['examples/deposit_block'] = array(
+    'page callback' => 'deposit_block_page',
+    'access callback' => TRUE,
+    'title' => 'Deposit Block',
+  );
+  return $items;
+}
+
+/**
+ * Simple page function to explain what the block example is about.
+ */
+function deposit_block_page() {
+  $page = array(
+    '#type' => 'markup',
+    '#markup' => t('This module displays a block with links to create deposit content (nodes types within deposit content type group)'),
+	);
+  return $page;
+}
+/**
+ * Implements hook_block_info().
+ *
+ * This hook declares what blocks are provided by the module.
+ */
+function deposit_block_block_info() {
+  $blocks['deposit_nodes'] = array(
+    // info: The name of the block.
+    'info' => t('Deposit content'),
+    'status' => TRUE,
+    'region' => 'sidebar_first',  // Not usually provided.
+		'pages' => 'node/*', // Not usually provided here.
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * This hook generates the contents of the blocks themselves.
+ */
+function deposit_block_block_view($delta = '') {
+  switch ($delta) {
+    case 'deposit_nodes':
+      $block['subject'] = t('Deposit content');
+      $block['content'] = deposit_block_contents($delta);
+      break;
+  }
+  return $block;
+}
+
+/**
+ * A module-defined block content function.
+ */
+function deposit_block_contents($which_block) {
+  switch ($which_block) {
+    case 'deposit_nodes':
+      
+      $parent = _get_deposit_parent();
+      $parent = 76;
+
+      if ($parent && module_exists('deposit_block_node_links')) {
+        return array('#markup' => deposit_block_node_links($nid));
+      } else {
+        return array('#markup' => deposit_block_global_links());
+      }
+  }
+}
+
+// returns links that will prepopulate a node reference (using noerference_url module)
+function deposit_block_node_links($nid) {
+  $node = node_load($nid);
+  $group = new ContentTypeGroup('deposit');
+  $menu_items = array('<ul>');
+  foreach($group->typeList() as $type => $name){
+    $link = nodereference_url_create_link($node, 'field_researchgroup', $type);
+    $menu_items[] = '<li>'. $link.'</li>';
+  }
+  $menu_items[] = '</ul>';
+  return implode("\n", $menu_items);
+}
+
+// return straight links to create each of the 'deposit' content types
+function deposit_block_global_links() {
+  $group = new ContentTypeGroup('deposit'); // Get the content type group of the given machine name	
+  $menu_items = array('<ul>');
+  foreach ($group->typeList() as $key => $type) {
+		$key = str_replace('_', '-', $key);
+    $menu_items[] = '<li>'. l($type, 'node/add/'.$key) .'</li>';
+  }
+  $menu_items[] = '</ul>';
+  return implode("\n", $menu_items);
+}
+
+function _get_deposit_parent() {
+  if(arg(0) == 'node' && is_numeric(arg(1))) {
+    return arg(1);
+  } else { 
+    return NULL;
+  }
+}
