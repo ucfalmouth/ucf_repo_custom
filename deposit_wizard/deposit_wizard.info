@@ -5,7 +5,6 @@ core = 7.x
 configure = admin/config/administration/deposit_wizard
 
 dependencies[] = content_type_groups
-dependencies[] = bundle_inherit
 
 files[] = deposit_wizard.info
 
