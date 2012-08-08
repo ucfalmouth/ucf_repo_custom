@@ -1,0 +1,5 @@
+name = Repository Help
+description = inserts help popups etc within site
+package = ucfalmouth
+core = 7.x
+dependencies[] = advanced_help

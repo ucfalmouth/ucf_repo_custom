@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Module file for repo_help.
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * Provides a default page to explain what this module does.
+ */
+function repo_help_menu() {
+  $items['admin/repository/help'] = array(
+    'page callback' => 'repo_help_page',
+    'access callback' => TRUE,
+    'title' => 'Repository Help',
+  );
+  return $items;
+}
+
+/**
+ * Simple page function to explain what the block example is about.
+ */
+function repo_help_page() {
+  $page = array(
+    '#type' => 'markup',
+    '#markup' => t('This module inserts help links into views etc, using advanced help pages and popups'),
+  );
+  return $page;
+}
+
