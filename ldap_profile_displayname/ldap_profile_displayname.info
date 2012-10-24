@@ -1,5 +1,5 @@
-name = "ldap_profile_displayname"
-description = displays a block with links to create content from deposit content type group
+name = ldap_profile_displayname
+description = copies field_displayname values (string populated by ldap_profile) to field_title_name (name module field)
 package = UCF Custom
 core = 7.x
 dependencies[] = block
