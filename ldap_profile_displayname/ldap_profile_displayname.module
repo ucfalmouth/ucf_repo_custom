@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Module file for ldap_profile_displayname.
+ */
+
+/* 
+ * Implements hook_user_presave 
+ */
+function ldap_profile_displayname_user_presave(&$edit, $account, $category) {
+  dpm($edit);
+  dpm($account);
+  dpm($category);
+}

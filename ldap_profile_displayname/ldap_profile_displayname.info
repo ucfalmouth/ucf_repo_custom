@@ -1,0 +1,6 @@
+name = "ldap_profile_displayname"
+description = displays a block with links to create content from deposit content type group
+package = UCF Custom
+core = 7.x
+dependencies[] = block
+
